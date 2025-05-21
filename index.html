@@ -1,700 +1,1227 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TechSolutions - Soluções em Software</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        .code-bg {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">def solve():</text><text x="15" y="35" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">return solution</text><text x="10" y="50" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">class Tech:</text><text x="15" y="65" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">def __init__():</text></svg>');
-        }
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        .recommendation-card {
-            transition: all 0.3s ease;
-        }
-        .recommendation-card:hover {
-            transform: scale(1.03);
-        }
-        .page {
-            display: none;
-        }
-        .page.active {
-            display: block;
-        }
-        .nav-link.active {
-            color: #3b82f6;
-            border-bottom: 2px solid #3b82f6;
-        }
+      .hero-bg {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.7)
+          ),
+          url("https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+      .code-bg {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">def solve():</text><text x="15" y="35" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">return solution</text><text x="10" y="50" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">class Tech:</text><text x="15" y="65" font-family="monospace" font-size="10" fill="rgba(74, 222, 128, 0.1)">def __init__():</text></svg>');
+      }
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .recommendation-card {
+        transition: all 0.3s ease;
+      }
+      .recommendation-card:hover {
+        transform: scale(1.03);
+      }
+      .page {
+        display: none;
+      }
+      .page.active {
+        display: block;
+      }
+      .nav-link.active {
+        color: #3b82f6;
+        border-bottom: 2px solid #3b82f6;
+      }
     </style>
-</head>
-<body class="font-sans bg-gray-50">
+  </head>
+  <body class="font-sans bg-gray-50">
     <!-- Navigation -->
     <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div>
-                        <a href="#" class="flex items-center py-4 px-2">
-                            <span class="font-semibold text-gray-900 text-2xl">TechSolutions</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="#" class="nav-link py-4 px-2 text-gray-700 border-b-2 border-blue-500 font-medium active" onclick="showPage('home')">Inicial</a>
-                    <a href="#" class="nav-link py-4 px-2 text-gray-500 hover:text-gray-900 transition duration-300" onclick="showPage('quotes')">Orçamentos</a>
-                    <a href="#" class="nav-link py-4 px-2 text-gray-500 hover:text-gray-900 transition duration-300" onclick="showPage('testimonials')">Depoimentos</a>
-                    <a href="#" class="nav-link py-4 px-2 text-gray-500 hover:text-gray-900 transition duration-300" onclick="showPage('recommendations')">Recomendações</a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button class="outline-none mobile-menu-button">
-                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between">
+          <div class="flex space-x-7">
+            <div>
+              <a href="#" class="flex items-center py-4 px-2">
+                <span class="font-semibold text-gray-900 text-2xl"
+                  >TechSolutions</span
+                >
+              </a>
             </div>
+          </div>
+          <div class="hidden md:flex items-center space-x-1">
+            <a
+              href="#"
+              class="nav-link py-4 px-2 text-gray-700 border-b-2 border-blue-500 font-medium active"
+              onclick="showPage('home')"
+              >Inicial</a
+            >
+            <a
+              href="#"
+              class="nav-link py-4 px-2 text-gray-500 hover:text-gray-900 transition duration-300"
+              onclick="showPage('quotes')"
+              >Orçamentos</a
+            >
+            <a
+              href="#"
+              class="nav-link py-4 px-2 text-gray-500 hover:text-gray-900 transition duration-300"
+              onclick="showPage('testimonials')"
+              >Depoimentos</a
+            >
+            <a
+              href="#"
+              class="nav-link py-4 px-2 text-gray-500 hover:text-gray-900 transition duration-300"
+              onclick="showPage('recommendations')"
+              >Recomendações</a
+            >
+          </div>
+          <div class="md:hidden flex items-center">
+            <button class="outline-none mobile-menu-button">
+              <svg
+                class="w-6 h-6 text-gray-700"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-        <div class="hidden mobile-menu bg-white border-t">
-            <ul class="">
-                <li><a href="#" class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300" onclick="showPage('home')">Inicial</a></li>
-                <li><a href="#" class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300" onclick="showPage('quotes')">Orçamentos</a></li>
-                <li><a href="#" class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300" onclick="showPage('testimonials')">Depoimentos</a></li>
-                <li><a href="#" class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300" onclick="showPage('recommendations')">Recomendações</a></li>
-            </ul>
-        </div>
+      </div>
+      <div class="hidden mobile-menu bg-white border-t">
+        <ul class="">
+          <li>
+            <a
+              href="#"
+              class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300"
+              onclick="showPage('home')"
+              >Inicial</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300"
+              onclick="showPage('quotes')"
+              >Orçamentos</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300"
+              onclick="showPage('testimonials')"
+              >Depoimentos</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block text-sm px-2 py-4 hover:bg-gray-100 transition duration-300"
+              onclick="showPage('recommendations')"
+              >Recomendações</a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
 
     <!-- Home Page -->
     <div id="home" class="page active">
-        <!-- Hero Section -->
-        <section class="hero-bg text-white py-20">
-            <div class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Soluções em Software Sob Medida</h1>
-                    <p class="text-xl mb-8">Transformamos desafios empresariais em soluções tecnológicas eficientes com desenvolvimento de apps, sistemas web, automações e análise de dados.</p>
-                    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="showPage('quotes')">Solicitar Orçamento</a>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Homem programando" class="rounded-lg shadow-2xl w-full max-w-md">
-                        <div class="absolute -inset-4 bg-blue-500 rounded-lg opacity-20 -z-10"></div>
-                    </div>
-                </div>
+      <!-- Hero Section -->
+      <section class="hero-bg text-white py-20">
+        <div
+          class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center"
+        >
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+              Soluções em Software Sob Medida
+            </h1>
+            <p class="text-xl mb-8">
+              Transformamos desafios empresariais em soluções tecnológicas
+              eficientes com desenvolvimento de apps, sistemas web, automações e
+              análise de dados.
+            </p>
+            <a
+              href="#"
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+              onclick="showPage('quotes')"
+              >Solicitar Orçamento</a
+            >
+          </div>
+          <div class="md:w-1/2 flex justify-center">
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80"
+                alt="Homem programando"
+                class="rounded-lg shadow-2xl w-full max-w-md"
+              />
+              <div
+                class="absolute -inset-4 bg-blue-500 rounded-lg opacity-20 -z-10"
+              ></div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <!-- About Section -->
-        <section class="py-20 code-bg">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16">Nossos Valores e Diferenciais</h2>
-                <div class="grid md:grid-cols-3 gap-10">
-                    <div class="bg-white p-8 rounded-lg shadow-lg">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-lightbulb text-4xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Inovação Contínua</h3>
-                        <p class="text-gray-600">Estamos sempre atualizados com as últimas tecnologias para oferecer as melhores soluções para seu negócio.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-lock text-4xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Segurança Garantida</h3>
-                        <p class="text-gray-600">Implementamos as melhores práticas de segurança em todos nossos projetos para proteger seus dados e sistemas.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-handshake text-4xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Parceria de Longo Prazo</h3>
-                        <p class="text-gray-600">Nosso compromisso vai além do projeto entregue, oferecemos suporte contínuo e melhorias conforme sua necessidade.</p>
-                    </div>
-                </div>
+      <!-- About Section -->
+      <section class="py-20 code-bg">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-bold text-center mb-16">
+            Nossos Valores e Diferenciais
+          </h2>
+          <div class="grid md:grid-cols-3 gap-10">
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+              <div class="text-blue-500 mb-4">
+                <i class="fas fa-lightbulb text-4xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Inovação Contínua</h3>
+              <p class="text-gray-600">
+                Estamos sempre atualizados com as últimas tecnologias para
+                oferecer as melhores soluções para seu negócio.
+              </p>
             </div>
-        </section>
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+              <div class="text-blue-500 mb-4">
+                <i class="fas fa-lock text-4xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Segurança Garantida</h3>
+              <p class="text-gray-600">
+                Implementamos as melhores práticas de segurança em todos nossos
+                projetos para proteger seus dados e sistemas.
+              </p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+              <div class="text-blue-500 mb-4">
+                <i class="fas fa-handshake text-4xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Parceria de Longo Prazo</h3>
+              <p class="text-gray-600">
+                Nosso compromisso vai além do projeto entregue, oferecemos
+                suporte contínuo e melhorias conforme sua necessidade.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Services Section -->
-        <section class="py-20 bg-gray-100">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-16">Nossos Serviços</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-mobile-alt text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Aplicativos Móveis</h3>
-                        <p class="text-gray-600">Desenvolvimento de apps nativos e híbridos para iOS e Android que impulsionam seu negócio.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-globe text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Sistemas Web</h3>
-                        <p class="text-gray-600">Plataformas web personalizadas para gestão, e-commerce ou qualquer necessidade específica.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-robot text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Automações</h3>
-                        <p class="text-gray-600">Automatizamos processos repetitivos para aumentar eficiência e reduzir custos operacionais.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-chart-line text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Análise de Dados</h3>
-                        <p class="text-gray-600">Transformamos dados em insights acionáveis para tomada de decisões estratégicas.</p>
-                    </div>
-                </div>
+      <!-- Services Section -->
+      <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-bold text-center mb-16">Nossos Serviços</h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300"
+            >
+              <div class="text-blue-500 mb-4">
+                <i class="fas fa-mobile-alt text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Aplicativos Móveis</h3>
+              <p class="text-gray-600">
+                Desenvolvimento de apps nativos e híbridos para iOS e Android
+                que impulsionam seu negócio.
+              </p>
             </div>
-        </section>
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300"
+            >
+              <div class="text-blue-500 mb-4">
+                <i class="fas fa-globe text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Sistemas Web</h3>
+              <p class="text-gray-600">
+                Plataformas web personalizadas para gestão, e-commerce ou
+                qualquer necessidade específica.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300"
+            >
+              <div class="text-blue-500 mb-4">
+                <i class="fas fa-robot text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Automações</h3>
+              <p class="text-gray-600">
+                Automatizamos processos repetitivos para aumentar eficiência e
+                reduzir custos operacionais.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300"
+            >
+              <div class="text-blue-500 mb-4">
+                <i class="fas fa-chart-line text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-3">Análise de Dados</h3>
+              <p class="text-gray-600">
+                Transformamos dados em insights acionáveis para tomada de
+                decisões estratégicas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- Quotes Page -->
     <div id="quotes" class="page">
-        <section class="py-20">
-            <div class="container mx-auto px-6 max-w-4xl">
-                <h1 class="text-3xl md:text-4xl font-bold text-center mb-6">Solicite um Orçamento</h1>
-                <p class="text-center text-gray-600 mb-12">Preencha o formulário abaixo e nossa equipe entrará em contato para discutir sua necessidade de automação ou desenvolvimento de software.</p>
-                
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-                    <div class="md:flex">
-                        <div class="md:w-1/2 bg-blue-500 text-white p-10">
-                            <h2 class="text-2xl font-bold mb-4">Por que automatizar?</h2>
-                            <p class="mb-6">Automações podem reduzir custos operacionais em até 70%, eliminar erros humanos e aumentar significativamente a produtividade da sua equipe.</p>
-                            <div class="mb-6">
-                                <h3 class="text-xl font-bold mb-2">Benefícios:</h3>
-                                <ul class="space-y-2">
-                                    <li class="flex items-center"><i class="fas fa-check-circle mr-2"></i> Processos mais rápidos e precisos</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle mr-2"></i> Redução de custos operacionais</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle mr-2"></i> Escalabilidade para seu negócio</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle mr-2"></i> Integração entre sistemas</li>
-                                </ul>
-                            </div>
-                            <p>Nossa equipe especializada analisará sua necessidade e desenvolverá a solução perfeita para seu negócio.</p>
-                        </div>
-                        <div class="md:w-1/2 p-10">
-                            <form id="quoteForm" class="space-y-6">
-                                <div>
-                                    <label for="name" class="block text-gray-700 font-medium mb-2">Nome Completo*</label>
-                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none">
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-gray-700 font-medium mb-2">E-mail*</label>
-                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none">
-                                </div>
-                                <div>
-                                    <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone*</label>
-                                    <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none">
-                                </div>
-                                <div>
-                                    <label for="company" class="block text-gray-700 font-medium mb-2">Empresa</label>
-                                    <input type="text" id="company" name="company" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-2">Qual serviço você precisa?</label>
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <label class="inline-flex items-center">
-                                            <input type="checkbox" name="service" value="app" class="form-checkbox text-blue-500">
-                                            <span class="ml-2">Aplicativo</span>
-                                        </label>
-                                        <label class="inline-flex items-center">
-                                            <input type="checkbox" name="service" value="web" class="form-checkbox text-blue-500">
-                                            <span class="ml-2">Sistema Web</span>
-                                        </label>
-                                        <label class="inline-flex items-center">
-                                            <input type="checkbox" name="service" value="automation" class="form-checkbox text-blue-500">
-                                            <span class="ml-2">Automação</span>
-                                        </label>
-                                        <label class="inline-flex items-center">
-                                            <input type="checkbox" name="service" value="data" class="form-checkbox text-blue-500">
-                                            <span class="ml-2">Análise de Dados</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="message" class="block text-gray-700 font-medium mb-2">Descreva sua necessidade*</label>
-                                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"></textarea>
-                                </div>
-                                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
-                                    Solicitar Orçamento
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+      <section class="py-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+          <h1 class="text-3xl md:text-4xl font-bold text-center mb-6">
+            Solicite um Orçamento
+          </h1>
+          <p class="text-center text-gray-600 mb-12">
+            Preencha o formulário abaixo e nossa equipe entrará em contato para
+            discutir sua necessidade de automação ou desenvolvimento de
+            software.
+          </p>
+
+          <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+            <div class="md:flex">
+              <div class="md:w-1/2 bg-blue-500 text-white p-10">
+                <h2 class="text-2xl font-bold mb-4">Por que automatizar?</h2>
+                <p class="mb-6">
+                  Automações podem reduzir custos operacionais em até 70%,
+                  eliminar erros humanos e aumentar significativamente a
+                  produtividade da sua equipe.
+                </p>
+                <div class="mb-6">
+                  <h3 class="text-xl font-bold mb-2">Benefícios:</h3>
+                  <ul class="space-y-2">
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle mr-2"></i> Processos mais
+                      rápidos e precisos
+                    </li>
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle mr-2"></i> Redução de custos
+                      operacionais
+                    </li>
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle mr-2"></i> Escalabilidade
+                      para seu negócio
+                    </li>
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle mr-2"></i> Integração entre
+                      sistemas
+                    </li>
+                  </ul>
                 </div>
-                
-                <div class="mt-16 bg-white rounded-lg shadow-lg p-8">
-                    <h2 class="text-2xl font-bold mb-4 text-center">Como funciona nosso processo?</h2>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="text-center">
-                            <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
-                                <i class="fas fa-comments text-blue-500 text-2xl"></i>
-                            </div>
-                            <h3 class="font-bold mb-2">1. Análise de Necessidade</h3>
-                            <p class="text-gray-600">Conversamos para entender completamente seu desafio e objetivos.</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
-                                <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
-                            </div>
-                            <h3 class="font-bold mb-2">2. Proposta de Solução</h3>
-                            <p class="text-gray-600">Desenvolvemos uma abordagem personalizada para seu caso.</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
-                                <i class="fas fa-rocket text-blue-500 text-2xl"></i>
-                            </div>
-                            <h3 class="font-bold mb-2">3. Implementação</h3>
-                            <p class="text-gray-600">Executamos o projeto com qualidade e dentro do prazo.</p>
-                        </div>
+                <p>
+                  Nossa equipe especializada analisará sua necessidade e
+                  desenvolverá a solução perfeita para seu negócio.
+                </p>
+              </div>
+              <div class="md:w-1/2 p-10">
+                <form id="quoteForm" class="space-y-6">
+                  <div>
+                    <label
+                      for="name"
+                      class="block text-gray-700 font-medium mb-2"
+                      >Nome Completo*</label
+                    >
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="email"
+                      class="block text-gray-700 font-medium mb-2"
+                      >E-mail*</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="phone"
+                      class="block text-gray-700 font-medium mb-2"
+                      >Telefone*</label
+                    >
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="company"
+                      class="block text-gray-700 font-medium mb-2"
+                      >Empresa</label
+                    >
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-gray-700 font-medium mb-2"
+                      >Qual serviço você precisa?</label
+                    >
+                    <div class="grid grid-cols-2 gap-4">
+                      <label class="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="service"
+                          value="app"
+                          class="form-checkbox text-blue-500"
+                        />
+                        <span class="ml-2">Aplicativo</span>
+                      </label>
+                      <label class="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="service"
+                          value="web"
+                          class="form-checkbox text-blue-500"
+                        />
+                        <span class="ml-2">Sistema Web</span>
+                      </label>
+                      <label class="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="service"
+                          value="automation"
+                          class="form-checkbox text-blue-500"
+                        />
+                        <span class="ml-2">Automação</span>
+                      </label>
+                      <label class="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="service"
+                          value="data"
+                          class="form-checkbox text-blue-500"
+                        />
+                        <span class="ml-2">Análise de Dados</span>
+                      </label>
                     </div>
-                </div>
+                  </div>
+                  <div>
+                    <label
+                      for="message"
+                      class="block text-gray-700 font-medium mb-2"
+                      >Descreva sua necessidade*</label
+                    >
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="4"
+                      required
+                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+                  >
+                    Solicitar Orçamento
+                  </button>
+                </form>
+              </div>
             </div>
-        </section>
+          </div>
+
+          <div class="mt-16 bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-4 text-center">
+              Como funciona nosso processo?
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+              <div class="text-center">
+                <div
+                  class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4"
+                >
+                  <i class="fas fa-comments text-blue-500 text-2xl"></i>
+                </div>
+                <h3 class="font-bold mb-2">1. Análise de Necessidade</h3>
+                <p class="text-gray-600">
+                  Conversamos para entender completamente seu desafio e
+                  objetivos.
+                </p>
+              </div>
+              <div class="text-center">
+                <div
+                  class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4"
+                >
+                  <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
+                </div>
+                <h3 class="font-bold mb-2">2. Proposta de Solução</h3>
+                <p class="text-gray-600">
+                  Desenvolvemos uma abordagem personalizada para seu caso.
+                </p>
+              </div>
+              <div class="text-center">
+                <div
+                  class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4"
+                >
+                  <i class="fas fa-rocket text-blue-500 text-2xl"></i>
+                </div>
+                <h3 class="font-bold mb-2">3. Implementação</h3>
+                <p class="text-gray-600">
+                  Executamos o projeto com qualidade e dentro do prazo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- Testimonials Page -->
     <div id="testimonials" class="page">
-        <section class="py-20 bg-gray-100">
-            <div class="container mx-auto px-6">
-                <h1 class="text-3xl md:text-4xl font-bold text-center mb-6">Depoimentos de Clientes</h1>
-                <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Veja o que nossos clientes têm a dizer sobre nossos serviços e como ajudamos a transformar seus negócios.</p>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Testimonial 1 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ana Silva" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h3 class="font-bold">Ana Silva</h3>
-                                <p class="text-gray-600 text-sm">CEO, Empresa X</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-3">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700">"A TechSolutions desenvolveu um sistema de gestão completo para nossa empresa que reduziu nosso tempo de processos em 60%. A equipe foi extremamente profissional e atenta às nossas necessidades específicas."</p>
-                    </div>
-                    
-                    <!-- Testimonial 2 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Carlos Mendes" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h3 class="font-bold">Carlos Mendes</h3>
-                                <p class="text-gray-600 text-sm">Diretor, Grupo Y</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-3">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700">"A automação desenvolvida pela TechSolutions para nosso setor financeiro eliminou erros manuais e nos poupa mais de 20 horas por semana. O retorno do investimento foi percebido em menos de 3 meses."</p>
-                    </div>
-                    
-                    <!-- Testimonial 3 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fernanda Oliveira" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h3 class="font-bold">Fernanda Oliveira</h3>
-                                <p class="text-gray-600 text-sm">Gerente, Startup Z</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-3">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star-half-alt text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700">"Nosso aplicativo desenvolvido pela TechSolutions superou todas as expectativas. A usabilidade é excelente e o suporte pós-entrega tem sido impecável. Já estamos planejando novos projetos com eles."</p>
-                    </div>
-                    
-                    <!-- Testimonial 4 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Ricardo Santos" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h3 class="font-bold">Ricardo Santos</h3>
-                                <p class="text-gray-600 text-sm">Diretor de TI, Empresa A</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-3">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700">"A integração de sistemas que a TechSolutions implementou resolveu um problema crônico em nossa operação. A equipe técnica tem um conhecimento profundo e soube traduzir nossa necessidade em uma solução eficiente."</p>
-                    </div>
-                    
-                    <!-- Testimonial 5 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Patrícia Lima" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h3 class="font-bold">Patrícia Lima</h3>
-                                <p class="text-gray-600 text-sm">COO, Empresa B</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-3">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700">"O dashboard de análise de dados desenvolvido nos proporcionou visibilidade que nunca tivemos sobre nossas operações. As decisões agora são baseadas em dados concretos e em tempo real."</p>
-                    </div>
-                    
-                    <!-- Testimonial 6 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Roberto Almeida" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h3 class="font-bold">Roberto Almeida</h3>
-                                <p class="text-gray-600 text-sm">CEO, Empresa C</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-3">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="far fa-star text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700">"Contratamos a TechSolutions para desenvolver um aplicativo complexo com integração a vários sistemas legados. O projeto foi entregue dentro do prazo e do orçamento, com qualidade excepcional."</p>
-                    </div>
+      <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h1 class="text-3xl md:text-4xl font-bold text-center mb-6">
+            Depoimentos de Clientes
+          </h1>
+          <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+            Veja o que nossos clientes têm a dizer sobre nossos serviços e como
+            ajudamos a transformar seus negócios.
+          </p>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div
+              class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300"
+            >
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/women/32.jpg"
+                  alt="Ana Silva"
+                  class="w-12 h-12 rounded-full mr-4"
+                />
+                <div>
+                  <h3 class="font-bold">Ana Silva</h3>
+                  <p class="text-gray-600 text-sm">CEO, Empresa X</p>
                 </div>
-                
-                <div class="mt-16 text-center">
-                    <h2 class="text-2xl font-bold mb-4">Pronto para transformar seu negócio?</h2>
-                    <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="showPage('quotes')">
-                        Solicite um Orçamento
-                    </a>
-                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+              </div>
+              <p class="text-gray-700">
+                "A TechSolutions desenvolveu um sistema de gestão completo para
+                nossa empresa que reduziu nosso tempo de processos em 60%. A
+                equipe foi extremamente profissional e atenta às nossas
+                necessidades específicas."
+              </p>
             </div>
-        </section>
+
+            <!-- Testimonial 2 -->
+            <div
+              class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300"
+            >
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/men/44.jpg"
+                  alt="Carlos Mendes"
+                  class="w-12 h-12 rounded-full mr-4"
+                />
+                <div>
+                  <h3 class="font-bold">Carlos Mendes</h3>
+                  <p class="text-gray-600 text-sm">Diretor, Grupo Y</p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+              </div>
+              <p class="text-gray-700">
+                "A automação desenvolvida pela TechSolutions para nosso setor
+                financeiro eliminou erros manuais e nos poupa mais de 20 horas
+                por semana. O retorno do investimento foi percebido em menos de
+                3 meses."
+              </p>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div
+              class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300"
+            >
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  alt="Fernanda Oliveira"
+                  class="w-12 h-12 rounded-full mr-4"
+                />
+                <div>
+                  <h3 class="font-bold">Fernanda Oliveira</h3>
+                  <p class="text-gray-600 text-sm">Gerente, Startup Z</p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star-half-alt text-yellow-400"></i>
+              </div>
+              <p class="text-gray-700">
+                "Nosso aplicativo desenvolvido pela TechSolutions superou todas
+                as expectativas. A usabilidade é excelente e o suporte
+                pós-entrega tem sido impecável. Já estamos planejando novos
+                projetos com eles."
+              </p>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div
+              class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300"
+            >
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/men/75.jpg"
+                  alt="Ricardo Santos"
+                  class="w-12 h-12 rounded-full mr-4"
+                />
+                <div>
+                  <h3 class="font-bold">Ricardo Santos</h3>
+                  <p class="text-gray-600 text-sm">Diretor de TI, Empresa A</p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+              </div>
+              <p class="text-gray-700">
+                "A integração de sistemas que a TechSolutions implementou
+                resolveu um problema crônico em nossa operação. A equipe técnica
+                tem um conhecimento profundo e soube traduzir nossa necessidade
+                em uma solução eficiente."
+              </p>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div
+              class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300"
+            >
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/women/90.jpg"
+                  alt="Patrícia Lima"
+                  class="w-12 h-12 rounded-full mr-4"
+                />
+                <div>
+                  <h3 class="font-bold">Patrícia Lima</h3>
+                  <p class="text-gray-600 text-sm">COO, Empresa B</p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+              </div>
+              <p class="text-gray-700">
+                "O dashboard de análise de dados desenvolvido nos proporcionou
+                visibilidade que nunca tivemos sobre nossas operações. As
+                decisões agora são baseadas em dados concretos e em tempo real."
+              </p>
+            </div>
+
+            <!-- Testimonial 6 -->
+            <div
+              class="bg-white p-8 rounded-lg shadow-md testimonial-card transition duration-300"
+            >
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="Roberto Almeida"
+                  class="w-12 h-12 rounded-full mr-4"
+                />
+                <div>
+                  <h3 class="font-bold">Roberto Almeida</h3>
+                  <p class="text-gray-600 text-sm">CEO, Empresa C</p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="fas fa-star text-yellow-400"></i>
+                <i class="far fa-star text-yellow-400"></i>
+              </div>
+              <p class="text-gray-700">
+                "Contratamos a TechSolutions para desenvolver um aplicativo
+                complexo com integração a vários sistemas legados. O projeto foi
+                entregue dentro do prazo e do orçamento, com qualidade
+                excepcional."
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-16 text-center">
+            <h2 class="text-2xl font-bold mb-4">
+              Pronto para transformar seu negócio?
+            </h2>
+            <a
+              href="#"
+              class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+              onclick="showPage('quotes')"
+            >
+              Solicite um Orçamento
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- Recommendations Page -->
     <div id="recommendations" class="page">
-        <section class="py-20">
-            <div class="container mx-auto px-6">
-                <h1 class="text-3xl md:text-4xl font-bold text-center mb-6">Recomendações e Cases</h1>
-                <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Conheça alguns de nossos projetos e soluções implementadas para clientes de diversos segmentos.</p>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Recommendation 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card">
-                        <div class="relative pb-2/3 h-48">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dashboard Analytics" class="absolute h-full w-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-4">
-                                <span class="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded">Análise de Dados</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Sistema de Analytics para Varejo</h3>
-                            <p class="text-gray-600 mb-4">Dashboard completo para análise de vendas, estoque e comportamento do consumidor em tempo real.</p>
-                            <button onclick="openVideo('https://www.youtube.com/watch?v=example1')" class="text-blue-500 font-medium flex items-center">
-                                <i class="fas fa-play-circle mr-2"></i> Ver Case
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Recommendation 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card">
-                        <div class="relative pb-2/3 h-48">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80" alt="Automação Financeira" class="absolute h-full w-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-4">
-                                <span class="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Automação</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Automação de Processos Financeiros</h3>
-                            <p class="text-gray-600 mb-4">Solução que reduziu em 80% o tempo de conciliação bancária para uma instituição financeira.</p>
-                            <button onclick="openVideo('https://www.youtube.com/watch?v=example2')" class="text-blue-500 font-medium flex items-center">
-                                <i class="fas fa-play-circle mr-2"></i> Ver Demonstração
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Recommendation 3 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card">
-                        <div class="relative pb-2/3 h-48">
-                            <img src="https://images.unsplash.com/photo-1555774698-0f77e70f5f2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="App Delivery" class="absolute h-full w-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-4">
-                                <span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded">Aplicativo</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Aplicativo de Delivery Personalizado</h3>
-                            <p class="text-gray-600 mb-4">Plataforma completa para restaurante com pedidos, pagamentos e fidelidade integrados.</p>
-                            <button onclick="openVideo('https://www.youtube.com/watch?v=example3')" class="text-blue-500 font-medium flex items-center">
-                                <i class="fas fa-play-circle mr-2"></i> Ver Vídeo
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Recommendation 4 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card">
-                        <div class="relative pb-2/3 h-48">
-                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Gestão de Equipes" class="absolute h-full w-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-4">
-                                <span class="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">Sistema Web</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Sistema de Gestão de Equipes</h3>
-                            <p class="text-gray-600 mb-4">Plataforma para gestão de projetos, tarefas e produtividade com relatórios customizados.</p>
-                            <button onclick="openVideo('https://www.youtube.com/watch?v=example4')" class="text-blue-500 font-medium flex items-center">
-                                <i class="fas fa-play-circle mr-2"></i> Ver Detalhes
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Recommendation 5 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card">
-                        <div class="relative pb-2/3 h-48">
-                            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="E-commerce" class="absolute h-full w-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-4">
-                                <span class="bg-yellow-500 text-white text-xs font-semibold px-2 py-1 rounded">E-commerce</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Plataforma de E-commerce Personalizada</h3>
-                            <p class="text-gray-600 mb-4">Solução completa com integração a ERP, gateways de pagamento e logística.</p>
-                            <button onclick="openVideo('https://www.youtube.com/watch?v=example5')" class="text-blue-500 font-medium flex items-center">
-                                <i class="fas fa-play-circle mr-2"></i> Ver Funcionalidades
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Recommendation 6 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card">
-                        <div class="relative pb-2/3 h-48">
-                            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="IA Chatbot" class="absolute h-full w-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-4">
-                                <span class="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded">Inteligência Artificial</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Chatbot com IA para Atendimento</h3>
-                            <p class="text-gray-600 mb-4">Solução que reduziu em 40% a demanda da central de atendimento com respostas precisas.</p>
-                            <button onclick="openVideo('https://www.youtube.com/watch?v=example6')" class="text-blue-500 font-medium flex items-center">
-                                <i class="fas fa-play-circle mr-2"></i> Ver Exemplo
-                            </button>
-                        </div>
-                    </div>
+      <section class="py-20">
+        <div class="container mx-auto px-6">
+          <h1 class="text-3xl md:text-4xl font-bold text-center mb-6">
+            Recomendações e Cases
+          </h1>
+          <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+            Conheça alguns de nossos projetos e soluções implementadas para
+            clientes de diversos segmentos.
+          </p>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Recommendation 1 -->
+            <div
+              class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card"
+            >
+              <div class="relative pb-2/3 h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                  alt="Dashboard Analytics"
+                  class="absolute h-full w-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"
+                ></div>
+                <div class="absolute bottom-0 left-0 p-4">
+                  <span
+                    class="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                    >Análise de Dados</span
+                  >
                 </div>
-                
-                <div class="mt-16 bg-blue-50 rounded-lg p-8 md:p-12">
-                    <div class="md:flex items-center">
-                        <div class="md:w-1/2 mb-8 md:mb-0">
-                            <h2 class="text-2xl md:text-3xl font-bold mb-4">Seu projeto poderia estar aqui</h2>
-                            <p class="text-gray-700 mb-6">Trabalhamos com cada cliente para desenvolver soluções personalizadas que atendam exatamente às suas necessidades de negócio.</p>
-                            <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="showPage('quotes')">
-                                Fale Conosco
-                            </a>
-                        </div>
-                        <div class="md:w-1/2 flex justify-center">
-                            <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Reunião de negócios" class="rounded-lg shadow-xl w-full max-w-md">
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">
+                  Sistema de Analytics para Varejo
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Dashboard completo para análise de vendas, estoque e
+                  comportamento do consumidor em tempo real.
+                </p>
+                <button
+                  onclick="openVideo('https://www.youtube.com/watch?v=example1')"
+                  class="text-blue-500 font-medium flex items-center"
+                >
+                  <i class="fas fa-play-circle mr-2"></i> Ver Case
+                </button>
+              </div>
             </div>
-        </section>
+
+            <!-- Recommendation 2 -->
+            <div
+              class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card"
+            >
+              <div class="relative pb-2/3 h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80"
+                  alt="Automação Financeira"
+                  class="absolute h-full w-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"
+                ></div>
+                <div class="absolute bottom-0 left-0 p-4">
+                  <span
+                    class="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                    >Automação</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">
+                  Automação de Processos Financeiros
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Solução que reduziu em 80% o tempo de conciliação bancária
+                  para uma instituição financeira.
+                </p>
+                <button
+                  onclick="openVideo('https://www.youtube.com/watch?v=example2')"
+                  class="text-blue-500 font-medium flex items-center"
+                >
+                  <i class="fas fa-play-circle mr-2"></i> Ver Demonstração
+                </button>
+              </div>
+            </div>
+
+            <!-- Recommendation 3 -->
+            <div
+              class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card"
+            >
+              <div class="relative pb-2/3 h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1555774698-0f77e70f5f2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                  alt="App Delivery"
+                  class="absolute h-full w-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"
+                ></div>
+                <div class="absolute bottom-0 left-0 p-4">
+                  <span
+                    class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                    >Aplicativo</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">
+                  Aplicativo de Delivery Personalizado
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Plataforma completa para restaurante com pedidos, pagamentos e
+                  fidelidade integrados.
+                </p>
+                <button
+                  onclick="openVideo('https://www.youtube.com/watch?v=example3')"
+                  class="text-blue-500 font-medium flex items-center"
+                >
+                  <i class="fas fa-play-circle mr-2"></i> Ver Vídeo
+                </button>
+              </div>
+            </div>
+
+            <!-- Recommendation 4 -->
+            <div
+              class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card"
+            >
+              <div class="relative pb-2/3 h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                  alt="Gestão de Equipes"
+                  class="absolute h-full w-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"
+                ></div>
+                <div class="absolute bottom-0 left-0 p-4">
+                  <span
+                    class="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                    >Sistema Web</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">
+                  Sistema de Gestão de Equipes
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Plataforma para gestão de projetos, tarefas e produtividade
+                  com relatórios customizados.
+                </p>
+                <button
+                  onclick="openVideo('https://www.youtube.com/watch?v=example4')"
+                  class="text-blue-500 font-medium flex items-center"
+                >
+                  <i class="fas fa-play-circle mr-2"></i> Ver Detalhes
+                </button>
+              </div>
+            </div>
+
+            <!-- Recommendation 5 -->
+            <div
+              class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card"
+            >
+              <div class="relative pb-2/3 h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                  alt="E-commerce"
+                  class="absolute h-full w-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"
+                ></div>
+                <div class="absolute bottom-0 left-0 p-4">
+                  <span
+                    class="bg-yellow-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                    >E-commerce</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">
+                  Plataforma de E-commerce Personalizada
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Solução completa com integração a ERP, gateways de pagamento e
+                  logística.
+                </p>
+                <button
+                  onclick="openVideo('https://www.youtube.com/watch?v=example5')"
+                  class="text-blue-500 font-medium flex items-center"
+                >
+                  <i class="fas fa-play-circle mr-2"></i> Ver Funcionalidades
+                </button>
+              </div>
+            </div>
+
+            <!-- Recommendation 6 -->
+            <div
+              class="bg-white rounded-lg overflow-hidden shadow-lg recommendation-card"
+            >
+              <div class="relative pb-2/3 h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80"
+                  alt="IA Chatbot"
+                  class="absolute h-full w-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"
+                ></div>
+                <div class="absolute bottom-0 left-0 p-4">
+                  <span
+                    class="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded"
+                    >Inteligência Artificial</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">
+                  Chatbot com IA para Atendimento
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Solução que reduziu em 40% a demanda da central de atendimento
+                  com respostas precisas.
+                </p>
+                <button
+                  onclick="openVideo('https://www.youtube.com/watch?v=example6')"
+                  class="text-blue-500 font-medium flex items-center"
+                >
+                  <i class="fas fa-play-circle mr-2"></i> Ver Exemplo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-16 bg-blue-50 rounded-lg p-8 md:p-12">
+            <div class="md:flex items-center">
+              <div class="md:w-1/2 mb-8 md:mb-0">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                  Seu projeto poderia estar aqui
+                </h2>
+                <p class="text-gray-700 mb-6">
+                  Trabalhamos com cada cliente para desenvolver soluções
+                  personalizadas que atendam exatamente às suas necessidades de
+                  negócio.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+                  onclick="showPage('quotes')"
+                >
+                  Fale Conosco
+                </a>
+              </div>
+              <div class="md:w-1/2 flex justify-center">
+                <img
+                  src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                  alt="Reunião de negócios"
+                  class="rounded-lg shadow-xl w-full max-w-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-12 pb-6">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">TechSolutions</h3>
-                    <p class="text-gray-400">Transformando desafios empresariais em soluções tecnológicas eficientes desde 2015.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Serviços</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('home')">Aplicativos Móveis</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('home')">Sistemas Web</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('home')">Automações</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('home')">Análise de Dados</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('home')">Inicial</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('quotes')">Orçamentos</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('testimonials')">Depoimentos</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition" onclick="showPage('recommendations')">Recomendações</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Contato</h4>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><i class="fas fa-envelope mr-2 text-gray-400"></i> <span class="text-gray-400">contato@techsolutions.com</span></li>
-                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2 text-gray-400"></i> <span class="text-gray-400">(11) 98765-4321</span></li>
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-gray-400"></i> <span class="text-gray-400">São Paulo, SP</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 TechSolutions. Todos os direitos reservados.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">TechSolutions</h3>
+            <p class="text-gray-400">
+              Transformando desafios empresariais em soluções tecnológicas
+              eficientes desde 2015.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-4">Serviços</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('home')"
+                  >Aplicativos Móveis</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('home')"
+                  >Sistemas Web</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('home')"
+                  >Automações</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('home')"
+                  >Análise de Dados</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-4">Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('home')"
+                  >Inicial</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('quotes')"
+                  >Orçamentos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('testimonials')"
+                  >Depoimentos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition"
+                  onclick="showPage('recommendations')"
+                  >Recomendações</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-4">Contato</h4>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                <span class="text-gray-400">contato@techsolutions.com</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                <span class="text-gray-400">(11) 98765-4321</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                <span class="text-gray-400">São Paulo, SP</span>
+              </li>
+            </ul>
+          </div>
         </div>
+        <div
+          class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-400 text-sm mb-4 md:mb-0">
+            © 2023 TechSolutions. Todos os direitos reservados.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Video Modal -->
-    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
-        <div class="relative w-full max-w-4xl">
-            <button onclick="closeVideo()" class="absolute -top-10 right-0 text-white text-2xl">&times;</button>
-            <div class="aspect-w-16 aspect-h-9 bg-black">
-                <iframe id="videoFrame" class="w-full h-96" frameborder="0" allowfullscreen></iframe>
-            </div>
+    <div
+      id="videoModal"
+      class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div class="relative w-full max-w-4xl">
+        <button
+          onclick="closeVideo()"
+          class="absolute -top-10 right-0 text-white text-2xl"
+        >
+          &times;
+        </button>
+        <div class="aspect-w-16 aspect-h-9 bg-black">
+          <iframe
+            id="videoFrame"
+            class="w-full h-96"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </div>
+      </div>
     </div>
 
     <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg p-8 max-w-md w-full text-center">
-            <div class="text-green-500 text-5xl mb-4">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h3 class="text-2xl font-bold mb-2">Orçamento Solicitado!</h3>
-            <p class="text-gray-600 mb-6">Recebemos sua solicitação de orçamento. Nossa equipe entrará em contato em até 24 horas.</p>
-            <button onclick="closeSuccessModal()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
-                Fechar
-            </button>
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div class="bg-white rounded-lg p-8 max-w-md w-full text-center">
+        <div class="text-green-500 text-5xl mb-4">
+          <i class="fas fa-check-circle"></i>
         </div>
+        <h3 class="text-2xl font-bold mb-2">Orçamento Solicitado!</h3>
+        <p class="text-gray-600 mb-6">
+          Recebemos sua solicitação de orçamento. Nossa equipe entrará em
+          contato em até 24 horas.
+        </p>
+        <button
+          onclick="closeSuccessModal()"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300"
+        >
+          Fechar
+        </button>
+      </div>
     </div>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.mobile-menu-button');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+      // Mobile menu toggle
+      const mobileMenuButton = document.querySelector(".mobile-menu-button");
+      const mobileMenu = document.querySelector(".mobile-menu");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Page navigation
+      function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll(".page").forEach((page) => {
+          page.classList.remove("active");
         });
-        
-        // Page navigation
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active', 'text-gray-700', 'border-blue-500');
-                link.classList.add('text-gray-500');
-            });
-            
-            // Set clicked link as active
-            if (pageId === 'home') {
-                document.querySelector('.nav-link').classList.add('active', 'text-gray-700', 'border-blue-500');
-                document.querySelector('.nav-link').classList.remove('text-gray-500');
-            } else {
-                const links = document.querySelectorAll('.nav-link');
-                for (let i = 0; i < links.length; i++) {
-                    if (links[i].textContent.toLowerCase().includes(pageId.substring(0, 3))) {
-                        links[i].classList.add('active', 'text-gray-700', 'border-blue-500');
-                        links[i].classList.remove('text-gray-500');
-                        break;
-                    }
-                }
+
+        // Show selected page
+        document.getElementById(pageId).classList.add("active");
+
+        // Update active nav link
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.classList.remove("active", "text-gray-700", "border-blue-500");
+          link.classList.add("text-gray-500");
+        });
+
+        // Set clicked link as active
+        if (pageId === "home") {
+          document
+            .querySelector(".nav-link")
+            .classList.add("active", "text-gray-700", "border-blue-500");
+          document.querySelector(".nav-link").classList.remove("text-gray-500");
+        } else {
+          const links = document.querySelectorAll(".nav-link");
+          for (let i = 0; i < links.length; i++) {
+            if (
+              links[i].textContent
+                .toLowerCase()
+                .includes(pageId.substring(0, 3))
+            ) {
+              links[i].classList.add(
+                "active",
+                "text-gray-700",
+                "border-blue-500"
+              );
+              links[i].classList.remove("text-gray-500");
+              break;
             }
-            
-            // Close mobile menu if open
-            mobileMenu.classList.add('hidden');
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
+          }
         }
-        
-        // Video modal
-        function openVideo(url) {
-            const videoId = url.split('v=')[1];
-            const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            document.getElementById('videoFrame').src = embedUrl;
-            document.getElementById('videoModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeVideo() {
-            document.getElementById('videoFrame').src = '';
-            document.getElementById('videoModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Form submission
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Here you would normally send the form data to your server
-            // For this example, we'll just show a success message
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            
-            // In a real application, you would send this data to your server
-            console.log('Form data:', data);
-            
-            // Show success modal
-            document.getElementById('successModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            
-            // Reset form
-            this.reset();
-        });
-        
-        function closeSuccessModal() {
-            document.getElementById('successModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
+
+        // Close mobile menu if open
+        mobileMenu.classList.add("hidden");
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
+
+      // Video modal
+      function openVideo(url) {
+        const videoId = url.split("v=")[1];
+        const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        document.getElementById("videoFrame").src = embedUrl;
+        document.getElementById("videoModal").classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeVideo() {
+        document.getElementById("videoFrame").src = "";
+        document.getElementById("videoModal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Form submission        document.getElementById('quoteForm').addEventListener('submit', async function(e) {            e.preventDefault();                        // Get form data            const formData = new FormData(this);            const data = {                nome: formData.get('name'),                email: formData.get('email'),                telefone: formData.get('phone'),                empresa: formData.get('company'),                servicos: Array.from(formData.getAll('service')),                mensagem: formData.get('message')            };                        try {                const response = await fetch('http://localhost:8000/api/orcamento', {                    method: 'POST',                    headers: {                        'Content-Type': 'application/json',                    },                    body: JSON.stringify(data)                });                if (response.ok) {                    // Show success modal                    document.getElementById('successModal').classList.remove('hidden');                    document.body.style.overflow = 'hidden';                                        // Reset form                    this.reset();                } else {                    const errorData = await response.json();                    alert('Erro ao enviar orçamento: ' + errorData.error);                }            } catch (error) {                alert('Erro ao enviar orçamento: ' + error.message);            }        });
+
+      function closeSuccessModal() {
+        document.getElementById("successModal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
     </script>
-</body>
+  </body>
 </html>
